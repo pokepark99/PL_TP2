@@ -65,14 +65,15 @@ class lexer:
     def t_numberF(self,t):
         r"[0-9]+\.[0.9]+"
         t.value =float (t.value)
+        return t
 
     def t_commentOne(self, t):
         r'--.*' #comentário de uma linha
-        return t
+        pass #nao devem retornar tokens
 
     def t_commentMult(self, t):
         r'{-(.|\n)*-}' #numero com um ou mais digitos
-        return t
+        pass
 
     def t_variavel(self, t):
         r'([a-z]|\_)([a-z]|[0-9]|[\_])*([\?|\!])?' #identificador de variavel
@@ -85,7 +86,7 @@ class lexer:
 
     def t_error(self, t):
             print(f"token inesperado'{t.value[0]}'")
-            exit(1)
+            t.lexer.skip(1)
 
     def t_newline(self, t):
             r'\n+'
