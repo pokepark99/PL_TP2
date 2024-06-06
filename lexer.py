@@ -14,7 +14,7 @@ class lexer:
         'commentMult', #comenatrios de varias linhas
         'and',  # '/\'
         'or',  # '\/'
-        'interpolation',
+        'interpolacao',
         'not', #operador lógico não 'neg'
 
     ]
@@ -25,14 +25,14 @@ class lexer:
         'SE':'SE',
         'FUNCAO':'FUNC',
         'ALEATORIO':'ALT',
-        'FIM':'END',
+        'FIM':'FIM',
         'map': 'MAP',  
         'fold': 'FOLD'  
     }
 
     tokens =tokens +list(reserved.values()) #lista final de tokens que o lexer vai reconhecer
 
-    literals = ['+','-','*','/','(',')',';',':','=','#','!','<','>', '[',']']
+    literals = ['+','-','*','/','(',')',';',':','=','!','<>', '[',']','#{','}']
     t_ignore = " \n"
     
     t_interpolation = r'\# [{][a-zA-Z_][a-zA-Z_0-9]*[}]' #expressoes regulares
