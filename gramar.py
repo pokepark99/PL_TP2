@@ -29,4 +29,4 @@ class Grammar:
         self.lexer.input(entrada)
         return self.yacc.parse(lexer=self.lexer.lexer)
 
- 
+    #regras 
