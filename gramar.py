@@ -11,6 +11,11 @@ class Grammar:
         ('left', '*', '/'),
     )
     
+    def __init__(self):
+        self.yacc = None
+        self.lexer = None
+        self.tokens = None
+        
     # inicializar o analisador sintatico
     def build(self, **kwargs): 
         self.lexer = lexer()
