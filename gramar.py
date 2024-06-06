@@ -1,6 +1,6 @@
 # analisador sintatico
 
-import ply.yacc as yacc
+import ply.yacc as pyacc
 from lexer import lexer
 
 class Grammar:
@@ -9,12 +9,20 @@ class Grammar:
     precedence = (
         ('left', '+', '-'),
         ('left', '*', '/'),
+        ('left', '<','>')
     )
     
+    def __init__(self):
+        self.lexer=None
+        self.yacc=None
+        self.tokens=None
+
     # inicializar o analisador sintatico
     def build(self, ): 
         self.lexer = lexer
-        self.lexer.build() # inicializar o analisador lexer
+        self.lexer.build(**kwargs) # inicializar o analisador lexer
+        self.tokens =self.lexer.tokens
+        self.yacc = pyacc.yacc(module=self, **kwargs)
 
     # inicia a analise sintatica
     def parse(self, entrada):  
