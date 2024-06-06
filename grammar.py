@@ -7,7 +7,7 @@ class Grammar:
     precedence = (
         ('left', '+', '-'),
         ('left', '*', '/'),
-        #('left', '<','>')
+        ('left', '<','>')
     )
     
     def __init__(self):
@@ -47,7 +47,7 @@ class Grammar:
                      | atribuicao
                      | definicaoF
                      | chamarF
-                     | condicional """
+                     | conditional """
         
         p[0]=p[1]
     
@@ -79,13 +79,19 @@ class Grammar:
         """expressao : termo
                      | expressao '+' termo
                      | expressao '-' termo
-                     | interpolacao"""
+                     | interpolacao
+                     | expressao '<' termo
+                     | expressao '>' termo"""
         if len(p)== 2:
             p[0]=p[1]
         elif p[2]=='+':
             p[0]=('+', p[1], p[3])
         elif p[2]=='-':
             p[0]=('-',p[1],p[3])
+        elif p[2] == '<':
+            p[0] = ('<', p[1], p[3])
+        elif p[2] == '>':
+            p[0] = ('>', p[1], p[3])
       
     def p_interpolacao (self,p):
         """interpolacao : expressao '#' '{' variavel '}' """

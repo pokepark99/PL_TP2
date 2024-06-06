@@ -124,6 +124,10 @@ class Evaluator:
                 return self.evaluate_expression(expr[1]) * self.evaluate_expression(expr[2])
             elif expr[0] == '/':
                 return self.evaluate_expression(expr[1]) // self.evaluate_expression(expr[2])
+            elif expr[0] == '<':
+                return self.evaluate_expression(expr[1]) < self.evaluate_expression(expr[2])
+            elif expr[0] == '>':
+                return self.evaluate_expression(expr[1]) > self.evaluate_expression(expr[2])
             elif expr[0] == 'interpolar':
                 return self.evaluate_interpolation(expr)
             elif expr[0] == 'concatenacao':
@@ -192,6 +196,10 @@ class Evaluator:
                 return f'({self.convert_expression_to_c(expr[1])} * {self.convert_expression_to_c(expr[2])})'
             elif expr[0] == '/':
                 return f'({self.convert_expression_to_c(expr[1])} / {self.convert_expression_to_c(expr[2])})'
+            elif expr[0] == '<':
+                return f'({self.convert_expression_to_c(expr[1])} < {self.convert_expression_to_c(expr[2])})'
+            elif expr[0] == '>':
+                return f'({self.convert_expression_to_c(expr[1])} > {self.convert_expression_to_c(expr[2])})'
         elif isinstance(expr, list):
             if len(expr) > 0:
                 return '{' + ', '.join([self.convert_expression_to_c(e) for e in expr]) + '}'
