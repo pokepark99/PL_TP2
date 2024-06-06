@@ -17,12 +17,7 @@ class Grammar:
         self.yacc=None
         self.tokens=None
 
-    # inicializar o analisador sintatico
-    def build(self, ): 
-        self.lexer = lexer
-        self.lexer.build(**kwargs) # inicializar o analisador lexer
-        self.tokens =self.lexer.tokens
-        self.yacc = pyacc.yacc(module=self, **kwargs)
+   
 
     # inicia a analise sintatica
     def parse(self, entrada):  
