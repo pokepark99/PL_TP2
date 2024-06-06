@@ -1,6 +1,6 @@
-from lexer import Lexico
+from lexer import lexer
 
-teste = Lexico()
+teste = lexer()
 teste.build()
 teste.input("") # por aqui algum input
 

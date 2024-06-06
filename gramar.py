@@ -1,13 +1,20 @@
 # analisador sintatico
 
 import ply.yacc as yacc
-from lexer import Lexico
+from lexer import lexer
 
 class Grammar:
+    # regras de precedencia 
+    # o que vem a esquerda tem precedencia do que vem a direita
+    precedence = (
+        ('left', '+', '-'),
+        ('left', '*', '/'),
+    )
+    
     # inicializar o analisador sintatico
     def build(self, ): 
-        self.lexer = Lexico
-        self.lexer.build() # inicializar o analisador lexico
+        self.lexer = lexer
+        self.lexer.build() # inicializar o analisador lexer
 
     # inicia a analise sintatica
     def parse(self, entrada):  
