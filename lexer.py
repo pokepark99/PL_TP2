@@ -14,8 +14,9 @@ class Lexer:
         'commentMult', #comenatrios de varias linhas
         'and',  # '/\'
         'or',  # '\/'
-        'interpolacao',
-        'not', #operador lógico não 'neg'
+        'interpolacao2',
+        'not', 
+        'condicional' #operador lógico não 'neg'
 
     ]
     
@@ -33,9 +34,9 @@ class Lexer:
     tokens =tokens +list(reserved.values()) #lista final de tokens que o lexer vai reconhecer
 
     literals = ['+','-','*','/','(',')',';',':','=','!','<','>', '[',']','#','{','}']
-    t_ignore = " \n"
+    t_ignore = " \t"
     
-    t_interpolacao = r'\# [{][a-zA-Z_][a-zA-Z_0-9]*[}]' #expressoes regulares
+    t_interpolacao2 = r'\# [{][a-zA-Z_][a-zA-Z_0-9]*[}]' #expressoes regulares
     t_and = r'/\\'
     t_or = r'\\/'
     t_not = r'neg'
@@ -64,7 +65,7 @@ class Lexer:
 
     def t_numberF(self,t):
         r"[0-9]+\.[0.9]+"
-        t.value =float (t.value)
+        t.value = float(t.value)
         return t
 
     def t_commentOne(self, t):
@@ -76,18 +77,20 @@ class Lexer:
         pass
 
     def t_variavel(self, t):
-        r'([a-z]|\_)([a-z]|[0-9]|[\_])*([\?|\!])?' #identificador de variavel
+        r'([a-zA-Z_])([a-zA-Z_0-9]*)([\?|\!]?)'
+        if t.value in self.reserved:
+            t.type = self.reserved[t.value]
         return t
 
     def t_string(self, t):
-            r'"([^"\\]|\\.)*"'  
-            t.value = t.value[1:-1]  # O 1 e -1 servem para remover as aspas
-            return t
+        r'"([^"\\]|\\.)*"'  
+        t.value = t.value[1:-1]  # O 1 e -1 servem para remover as aspas
+        return t
 
     def t_error(self, t):
-            print(f"token inesperado'{t.value[0]}'")
-            t.lexer.skip(1)
+        print(f"token inesperado'{t.value[0]}'")
+        t.lexer.skip(1)
 
     def t_newline(self, t):
-            r'\n+'
-            self.lexer.lineno += len(t.value)        
+        r'\n+'
+        self.lexer.lineno += len(t.value)        
