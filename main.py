@@ -11,7 +11,7 @@
 
 import sys
 import os
-from gramar import Grammar
+from grammar import Grammar
 
 # se recebeu o nome do ficheiro fca
 if len(sys.argv) == 2:

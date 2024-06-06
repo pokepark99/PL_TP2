@@ -2,7 +2,7 @@
 
 import ply.lex as plex
 
-class lexer:
+class Lexer:
     tokens=[            #tokens que o lexer deve reconhecer
         'number', #numerointeiro
         'numberF', #numero decimal
