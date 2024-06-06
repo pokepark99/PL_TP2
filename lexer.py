@@ -8,7 +8,7 @@ class lexer:
         'numberF', #numero decimal
         'true',
         'false',
-        'variavel' #identificador variavel/funcao
+        'variavel', #identificador variavel/funcao
         'string', #string entre ""
         'commentOne', #comentarios de uma linha
         'commentMult', #comenatrios de varias linhas
@@ -40,7 +40,8 @@ class lexer:
     t_or = r'\\/'
     t_not = r'neg'
 
-    #init
+    def __init__(self):
+        self.lexer=None
 
     # inicializar o analisador lexico
     def build(self, **kwargs): 

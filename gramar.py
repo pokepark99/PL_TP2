@@ -1,6 +1,6 @@
 # analisador sintatico
 
-import ply.yacc as pyacc
+import ply.yacc as yacc
 from lexer import lexer
 
 class Grammar:
@@ -29,8 +29,4 @@ class Grammar:
         self.lexer.input(entrada)
         return self.yacc.parse(lexer=self.lexer.lexer)
 
-    # gramatica
-    def p_expr(self, p): 
-        # isto e um exemplo
-        """ E : E '+' T 
-            | E E"""
+ 
