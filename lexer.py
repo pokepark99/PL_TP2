@@ -32,10 +32,10 @@ class Lexer:
 
     tokens =tokens +list(reserved.values()) #lista final de tokens que o lexer vai reconhecer
 
-    literals = ['+','-','*','/','(',')',';',':','=','!','<>', '[',']','#{','}']
+    literals = ['+','-','*','/','(',')',';',':','=','!','<','>', '[',']','#','{','}']
     t_ignore = " \n"
     
-    t_interpolation = r'\# [{][a-zA-Z_][a-zA-Z_0-9]*[}]' #expressoes regulares
+    t_interpolacao = r'\# [{][a-zA-Z_][a-zA-Z_0-9]*[}]' #expressoes regulares
     t_and = r'/\\'
     t_or = r'\\/'
     t_not = r'neg'

@@ -1,7 +1,7 @@
 # analisador sintatico
 
 import ply.yacc as yacc
-from lexer import lexer
+from lexer import Lexer
 
 class Grammar:
     # regras de precedencia 
@@ -19,7 +19,7 @@ class Grammar:
 
     # inicializar o analisador sintatico
     def build(self, **kwargs): 
-        self.lexer = lexer()
+        self.lexer = Lexer()
         self.lexer.build(**kwargs) # inicializar o analisador lexer
         self.tokens = self.lexer.tokens
         self.yacc = yacc.yacc(module=self, **kwargs)
@@ -89,8 +89,8 @@ class Grammar:
             p[0]=('-',p[1],p[3])
       
     def p_interpolacao (self,p):
-        """interpolacao: expressao '#{' variavel '}' """
-        p[0]= ('interpolar', p[1], p[3])
+        """interpolacao: expressao '#' '{' variavel '}' """
+        p[0]= ('interpolar', p[1], p[4])
 
     def p_termo (self,p):
         """termo: fator
@@ -120,8 +120,8 @@ class Grammar:
             p[0] = p[2]
 
     def p_concatenacao(self,p):
-        """expressao: expressao '<>' expressao"""
-        p[0]=('concatenacao',p[1],p[3])
+        """expressao: expressao '<' '>' expressao"""
+        p[0]=('concatenacao',p[1],p[4])
 
     def p_aleatorio(self,p):
         """aleatorio: ALT '(' number ')'
