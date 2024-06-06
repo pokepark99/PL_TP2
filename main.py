@@ -1,3 +1,14 @@
+"""
+	Processamento de Linguagens (ESI) 
+	Trabalho Prático 2
+    Alunos: 
+        Daniela Pereira n25988
+        Sofia Carvalho n25991
+        Diogo Fernandes n26008
+	
+	invocar como: python main.py <ficheiro.fca>	
+"""
+
 import sys
 import os
 from gramar import Grammar

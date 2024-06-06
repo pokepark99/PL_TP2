@@ -18,6 +18,12 @@ class Grammar:
         self.tokens=None
 
    
+    # inicializar o analisador sintatico
+    def build(self, **kwargs): 
+        self.lexer = lexer()
+        self.lexer.build(**kwargs) # inicializar o analisador lexer
+        self.tokens = self.lexer.tokens
+        self.yacc = yacc.yacc(module=self, **kwargs)
 
     # inicia a analise sintatica
     def parse(self, entrada):  

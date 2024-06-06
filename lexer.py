@@ -40,52 +40,52 @@ class lexer:
     t_or = r'\\/'
     t_not = r'neg'
 
-#init
+    #init
 
-# inicializar o analisador lexico
-def build(self, **kwargs): 
-    self.lexer = plex.lex(module=self, **kwargs)
+    # inicializar o analisador lexico
+    def build(self, **kwargs): 
+        self.lexer = plex.lex(module=self, **kwargs)
 
-# define o texto de entrada
-def input(self, string): 
-    self.lexer.input(string)
+    # define o texto de entrada
+    def input(self, string): 
+        self.lexer.input(string)
 
-# determina o prox. token
-def token(self):  
-    token = self.lexer.token()
-    return token if token is None else token.type
+    # determina o prox. token
+    def token(self):  
+        token = self.lexer.token()
+        return token if token is None else token.type
 
 
-def t_number(self, t):
-    r'[0-9]+' #numero com um ou mais digitos
-    t.value = int(t.value)
-    return t
-
-def t_numberF(self,t):
-    r"[0-9]+\.[0.9]+"
-    t.value =float (t.value)
-
-def t_commentOne(self, t):
-    r'--.*' #comentário de uma linha
-    return t
-
-def t_commentMult(self, t):
-    r'{-(.|\n)*-}' #numero com um ou mais digitos
-    return t
-
-def t_variavel(self, t):
-    r'([a-z]|\_)([a-z]|[0-9]|[\_])*([\?|\!])?' #identificador de variavel
-    return t
-
-def t_STRING(self, t):
-        r'"([^"\\]|\\.)*"'  # ([^"\\]|\\.) -> Grupo de caracteres que corresponde a qualquer caractere que não seja uma aspas duplas (") ou uma barra invertida (\)
-        t.value = t.value[1:-1]  # O 1 e -1 servem para remover as aspas
+    def t_number(self, t):
+        r'[0-9]+' #numero com um ou mais digitos
+        t.value = int(t.value)
         return t
 
-def t_error(self, t):
-        print(f"token inesperado'{t.value[0]}'")
-        exit(1)
+    def t_numberF(self,t):
+        r"[0-9]+\.[0.9]+"
+        t.value =float (t.value)
 
-def t_newline(self, t):
-        r'\n+'
-        self.lexer.lineno += len(t.value)        
+    def t_commentOne(self, t):
+        r'--.*' #comentário de uma linha
+        return t
+
+    def t_commentMult(self, t):
+        r'{-(.|\n)*-}' #numero com um ou mais digitos
+        return t
+
+    def t_variavel(self, t):
+        r'([a-z]|\_)([a-z]|[0-9]|[\_])*([\?|\!])?' #identificador de variavel
+        return t
+
+    def t_string(self, t):
+            r'"([^"\\]|\\.)*"'  
+            t.value = t.value[1:-1]  # O 1 e -1 servem para remover as aspas
+            return t
+
+    def t_error(self, t):
+            print(f"token inesperado'{t.value[0]}'")
+            exit(1)
+
+    def t_newline(self, t):
+            r'\n+'
+            self.lexer.lineno += len(t.value)        
