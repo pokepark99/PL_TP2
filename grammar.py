@@ -1,5 +1,3 @@
-# analisador sintatico
-
 import ply.yacc as yacc
 from lexer import Lexer
 
@@ -13,9 +11,10 @@ class Grammar:
     )
     
     def __init__(self):
-        self.lexer=None
-        self.yacc=None
-        self.tokens=None
+        self.lexer = Lexer()
+        self.lexer.build()
+        self.tokens = self.lexer.tokens
+        self.yacc = yacc.yacc(module=self)
 
     # inicializar o analisador sintatico
     def build(self, **kwargs): 
@@ -146,7 +145,8 @@ class Grammar:
         if len(p)==2:
             p[0]=[p[1]]     #unico elemento na lista
         else:
-            p[0] = p[1].append(p[3])   #adiciona a nov aexpressao p3 À lista existente p1
+            p[0] = p[1]
+            p[0].append(p[3])   #adiciona a nov aexpressao p3 À lista existente p1
 
     def p_parametros(self,p):
         """parametros : variavel
@@ -164,9 +164,9 @@ class Grammar:
         else:
             p[0]= p[1].append(p[3])
 
-    def p_error(self,p):
-        
+    def p_error(self, p):
+
         if p:
-            print(f"Erro de sintaxe: 'token {p.value} na posicao{p.lexpos}'")
+            print(f"Erro de sintaxe: 'token {p.value} na posicao {p.lexpos}'")
         else:
             print("Erro de sintaxe: fim inesperado do arquivo")

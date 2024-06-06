@@ -33,7 +33,7 @@ class Lexer:
 
     tokens =tokens +list(reserved.values()) #lista final de tokens que o lexer vai reconhecer
 
-    literals = ['+','-','*','/','(',')',';',':','=','!','<','>', '[',']','#','{','}']
+    literals = ['+','-','*','/','(',')',';',':','=','!','<','>', '[',']','#','{','}',',']
     t_ignore = " \t"
     
     t_interpolacao2 = r'\# [{][a-zA-Z_][a-zA-Z_0-9]*[}]' #expressoes regulares
